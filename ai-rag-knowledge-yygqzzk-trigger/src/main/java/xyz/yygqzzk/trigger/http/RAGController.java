@@ -9,7 +9,6 @@ import org.springframework.ai.ollama.OllamaChatClient;
 import org.springframework.ai.reader.tika.TikaDocumentReader;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.PgVectorStore;
-import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import xyz.yygqzzk.api.IRAGService;
@@ -81,8 +80,8 @@ public class RAGController implements IRAGService {
 
         log.info("知识库上传完成 {}", ragTag);
         return Response.<String>builder()
-                .code(ResponseCode.SUCCESS.getCode())
-                .info(ResponseCode.SUCCESS.getInfo())
+                .code("0000")
+                .info("上传成功")
                 .build();
     }
 }
