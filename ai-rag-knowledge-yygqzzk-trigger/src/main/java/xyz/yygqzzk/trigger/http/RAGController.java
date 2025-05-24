@@ -46,7 +46,7 @@ public class RAGController implements IRAGService {
 
 
     @Override
-    @RequestMapping(value = "/rag_tag_list", method = RequestMethod.GET)
+    @RequestMapping(value = "/query_rag_tag_list", method = RequestMethod.GET)
     public Response<List<String>> queryRagTagList() {
         RList<String> elements = redissonClient.getList("rag_tag");
         return Response.<List<String>>builder()
@@ -57,7 +57,7 @@ public class RAGController implements IRAGService {
     }
 
     @Override
-    @RequestMapping(value = "/upload_file", method = RequestMethod.POST)
+    @RequestMapping(value = "/file/upload", method = RequestMethod.POST)
     public Response<String> uploadFile(@RequestParam String ragTag, @RequestParam("file") List<MultipartFile> files) {
         log.info("上传知识库开始 {}", ragTag);
 
@@ -70,12 +70,13 @@ public class RAGController implements IRAGService {
             });
             pgVectorStore.accept(documents);
 
-            RList<Object> elements = redissonClient.getList("rag_tag");
-            if(!elements.contains(ragTag)){
-                elements.add(ragTag);
-            }
             log.info("{} 上传完成", file.getName());
+        }
 
+        // redis 中存储各个知识库的标签 ragtag
+        RList<Object> elements = redissonClient.getList("rag_tag");
+        if(!elements.contains(ragTag)){
+            elements.add(ragTag);
         }
 
         log.info("知识库上传完成 {}", ragTag);
