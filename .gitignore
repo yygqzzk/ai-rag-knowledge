@@ -41,3 +41,4 @@ build/
 /ai-rag-knowledge-yygqzzk-app/src/main/resources/application-prod.yml
 /ai-rag-knowledge-yygqzzk-app/src/main/resources/application-test.yml
 /.idea/
+/ai-rag-knowledge-yygqzzk-app/cloned-repo/
