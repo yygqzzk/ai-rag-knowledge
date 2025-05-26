@@ -1,0 +1,17 @@
+# docker-compose -f docker-compose-environment-ollama.yml up -d
+version: '3'
+services:
+  # 对话模型
+  # ollama pull deepseek-r1:1.5b
+  # 运行模型
+  # ollama run deepseek-r1:1.5b
+  # 联网模型
+  # ollama pull nomic-embed-text
+  ollama:
+    image: registry.cn-hangzhou.aliyuncs.com/xfg-studio/ollama:0.5.10
+    container_name: ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+
+
